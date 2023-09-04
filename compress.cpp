@@ -13,17 +13,17 @@ int main(int argc, char* argv[]) {
 
     std::map<int, int> aMap;
     std::vector<int> freqVector;
-    while (int byteValue = inputFile.read_byte() != -1) {
-        for (int i = 0; i < inputFile.filesize(); i++) {
+    
+    for (int i = 0; i < inputFile.filesize(); i++) {
             aMap[i] = 0;
-        }
-        for (int i = 0; i < inputFile.filesize(); i++) {
-            aMap[byteValue] = aMap[byteValue]++;
-        }
-        for (int i = 0; i < inputFile.filesize(); i++) {
-            freqVector.push_back(aMap[i]);
-        }
     }
+    while ((int byteValue = inputFile.read_byte()) != EOF) {
+        aMap[byteValue] = aMap[byteValue]++;
+    }
+    for (int i = 0; i < inputFile.filesize(); i++) {
+            freqVector.push_back(aMap[i]);
+    }
+    
     HCTree freqMap;
     freqMap.build(freqVector);
 
